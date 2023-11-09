@@ -217,7 +217,7 @@ void kernel(int id) {
   int cost[(SIZE-1)/NUM];
   int j = (SIZE-1)/NUM*id + 1;
   for(int i = 1; i < SIZE; ++i) {
-    #pragma clang loop vectorize(enable) vectorize_width(4) unroll_count(4)
+    //#pragma clang loop vectorize(enable) vectorize_width(4) unroll_count(4)
     //#pragma clang loop vectorize(disable) unroll_count(4)
     for(int x=0; x<(SIZE-1)/NUM; ++x) {
       cost[x] = absolute(S[i]-T[j+x]); 
