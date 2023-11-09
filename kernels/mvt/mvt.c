@@ -69,7 +69,7 @@ void print_array(int n,
    including the call and return. */
 __attribute__((noinline))
 static
-void kernel_mvt(int n,
+void kernel(int n,
 		DATA_TYPE POLYBENCH_1D(x1,N,n),
 		DATA_TYPE POLYBENCH_1D(x2,N,n),
 		DATA_TYPE POLYBENCH_1D(y_1,N,n),
@@ -82,7 +82,7 @@ void kernel_mvt(int n,
   #pragma clang loop unroll_count(1)
   for (j = 0; j < N; j++) {
     // #pragma clang loop unroll_count(1) vectorize(disable)
-    #pragma clang loop unroll_count(1) vectorize_width(4)
+    //#pragma clang loop unroll_count(1) vectorize_width(4)
     for (i = 0; i < N; i++) {
       x1[i] = x1[i] + A[i][j] * y_1[j];
       x2[i] = x2[i] + A[j][i] * y_2[j];
@@ -117,7 +117,7 @@ int main(int argc, char** argv)
   polybench_start_instruments;
 
   /* Run kernel. */
-  kernel_mvt (n,
+  kernel(n,
 	      POLYBENCH_ARRAY(x1),
 	      POLYBENCH_ARRAY(x2),
 	      POLYBENCH_ARRAY(y_1),
